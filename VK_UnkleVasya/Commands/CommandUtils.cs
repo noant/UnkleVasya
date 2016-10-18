@@ -7,19 +7,19 @@ namespace VK_UnkleVasya.Commands
 {
     public static class CommandUtils
     {
-        private static readonly Dictionary<Type,string[]> CommandsData = new Dictionary<Type, string[]>();
+        private static readonly Dictionary<Type, string[]> CommandsData = new Dictionary<Type, string[]>();
 
-        private static string[] LoadCommandData<T>() where T : ICommand
+        private static string[] LoadCommandData(Type type)
         {
-            var filename = StringConstants.CommandsFolder + typeof(T).Name + ".xml";
+            var filename = StringConstants.CommandsFolder + type.Name + ".xml";
             return Utils.LoadStringData(filename);
         }
 
-        public static string[] GetCommandData<T>() where T : ICommand
+        public static string[] GetCommandData(Type type)
         {
-            if (!CommandsData.ContainsKey(typeof (T)))
-                CommandsData.Add(typeof (T), LoadCommandData<T>());
-            return CommandsData[typeof (T)];
+            if (!CommandsData.ContainsKey(type))
+                CommandsData.Add(type, LoadCommandData(type));
+            return CommandsData[type];
         }
 
         public static string ExtractQueryStandart(string[] allKeys, string query)
@@ -32,25 +32,35 @@ namespace VK_UnkleVasya.Commands
             query = query.Trim().ToLower();
             return !string.IsNullOrEmpty(query) && allKeys.Any(x => query.StartsWith(x));
         }
-        
-        private static ICommand[] GetAllCommands()
+
+        private static Command[] GetAllCommands()
         {
             return Assembly.GetExecutingAssembly().GetTypes().Where(
-                x => x.GetInterfaces().Contains(typeof (ICommand)) &&
-                     !x.IsAbstract &&
+                x => x.BaseType.Equals(typeof(Command)) &&
                      !x.GetConstructors().Any(z => z.GetParameters().Any()))
-                .Select(x => (ICommand) x.GetConstructor(null).Invoke(null))
+                .Select(x => (Command)x.GetConstructor(null).Invoke(null))
                 .ToArray();
         }
 
-        private static ICommand[] _commands;
-        public static ICommand[] AllCommands
+        private static Command[] _commands;
+        public static Command[] AllCommands
         {
             get
             {
                 if (_commands == null)
                     _commands = GetAllCommands();
                 return _commands;
+            }
+        }
+
+        private static Command _startCommand;
+        public static Command StartCommand
+        {
+            get
+            {
+                if (_startCommand == null)
+                    _startCommand = AllCommands.Single(x => x is StartCommand);
+                return _startCommand;
             }
         }
     }

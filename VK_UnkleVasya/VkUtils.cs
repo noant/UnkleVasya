@@ -16,7 +16,7 @@ namespace VK_UnkleVasya
 
         public static Photo[] GetNextPictures(VkApi vk, int count)
         {
-            var album = EroRepository.Repository.Albums[GetNextRandom(0, EroRepository.Repository.Albums.Length - 1)];
+            var album = EroRepository.Repository.Albums[Utils.GetNextRandom(0, EroRepository.Repository.Albums.Length - 1)];
             if (album.PhotosCount == null)
             {
                 album.PhotosCount =
@@ -33,10 +33,10 @@ namespace VK_UnkleVasya
                 var photo = vk.Photo.Get(new PhotoGetParams()
                 {
                     AlbumId = PhotoAlbumType.Id(album.Id),
-                    OwnerId = album.GroupId*-1,
-                    Reversed = GetNextRandom(0, 1) == 0,
+                    OwnerId = album.GroupId * -1,
+                    Reversed = Utils.GetNextRandom(0, 1) == 0,
                     Count = 1,
-                    Offset = (ulong?) GetNextRandom(0, (int) album.PhotosCount.Value - 1)
+                    Offset = (ulong?)Utils.GetNextRandom(0, (int)album.PhotosCount.Value - 1)
                 }).FirstOrDefault();
                 Thread.Sleep(340); //technical sleep for vk
                 arr[count] = photo;
@@ -62,30 +62,6 @@ namespace VK_UnkleVasya
             return creds;
         }
 
-        public static bool IsResponsePattern(string message)
-        {
-            var mes = message.ToLower();
-            return mes.StartsWith("дв ") || mes.StartsWith("дядя вася ") || mes.StartsWith("васяныч ") ||
-                mes.StartsWith("дв,") || mes.StartsWith("дядя вася,") || mes.StartsWith("васяныч,");
-        }
-
-        public static bool IsStartIntervalDispatcherRequest(string query)
-        {
-            return query.ToLower() == "качай интервалом";
-        }
-
-        public static bool IsStopIntervalDispatcherRequest(string query)
-        {
-            return query.ToLower() == "хорош интервалом";
-        }
-
-        public static string GetQuery(string message)
-        {
-            var mes = message.ToLower();
-            return mes.Replace("дв ", "").Replace("дядя вася ", "").Replace("васяныч ", "")
-                .Replace("дв,", "").Replace("дядя вася,", "").Replace("васяныч,", "").Trim();
-        }
-
         public static void SendMessage(VkApi vk, Message message, string message_string)
         {
             if (message.ChatId == null)
@@ -105,7 +81,7 @@ namespace VK_UnkleVasya
                 });
             }
         }
-        
+
         public static void SendImages(VkApi vk, Message message, Photo[] photos, string text)
         {
             var sendParams = new MessagesSendParams();

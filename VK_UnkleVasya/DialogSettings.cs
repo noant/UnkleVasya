@@ -24,7 +24,7 @@ namespace VK_UnkleVasya
         public DialogSettings() { }
 
         public long Id { get; set; }
-        
+
         [XmlIgnore]
         public VkApi Vk { get; set; }
 
@@ -65,7 +65,7 @@ namespace VK_UnkleVasya
                     {
                         try
                         {
-                            lock (Vk) VkUtils.SendImages(Vk, Message, VkUtils.GetNextPictures(Vk,5), RandomMessages.GetNext_Interval());
+                            lock (Vk) VkUtils.SendImages(Vk, Message, VkUtils.GetNextPictures(Vk, 5), RandomMessages.GetNext_Interval());
                             Thread.Sleep(1000 * 60 * 60);
                         }
                         catch (Exception e)
@@ -80,8 +80,8 @@ namespace VK_UnkleVasya
                 if (save)
                     SaveToFile();
             }
-            else if (sendMessage) 
-                    lock (Vk) VkUtils.SendMessage(Vk, Message, StringConstants.Dialog_IntervalAlwaysDoResponse);
+            else if (sendMessage)
+                lock (Vk) VkUtils.SendMessage(Vk, Message, StringConstants.Dialog_IntervalAlwaysDoResponse);
         }
 
         private void StopIntervalDispatching(bool sendMessage, bool save)
@@ -100,18 +100,18 @@ namespace VK_UnkleVasya
             else if (sendMessage) VkUtils.SendMessage(Vk, Message, StringConstants.Dialog_IntervalAlwaysNotDoResponse);
         }
 
-        public void StartIntevalDispatching()
+        public void StartIntervalDispatching()
         {
-            StartIntevalDispatching(true,true);
+            StartIntevalDispatching(true, true);
         }
 
         public void StopIntervalDispatching()
         {
-            StopIntervalDispatching(true,true);
+            StopIntervalDispatching(true, true);
         }
 
         private static readonly Dictionary<long, DialogSettings> Sessions = new Dictionary<long, DialogSettings>();
-        private static DialogSettings GetSession(VkApi vk, Message message)
+        public static DialogSettings GetSession(VkApi vk, Message message)
         {
             var id = (message.ChatId ?? message.UserId).Value * (message.ChatId != null ? -1 : 1);
             if (!Sessions.ContainsKey(id))
@@ -123,15 +123,18 @@ namespace VK_UnkleVasya
         {
             foreach (var filename in Directory.GetFiles(StringConstants.SessionsFolder))
             {
-                var hData = HierarchicalObject.FromFile(filename);
-                DialogSettings dialog = hData[0];
-                dialog.Message = NeedMessage(dialog.Id);
-                dialog.Vk = NeedApi();
-                Sessions.Add(dialog.Id, dialog);
+                if (!filename.EndsWith(StringConstants.ExceptSessionFilename))
+                {
+                    var hData = HierarchicalObject.FromFile(filename);
+                    DialogSettings dialog = hData[0];
+                    dialog.Message = NeedMessage(dialog.Id);
+                    dialog.Vk = NeedApi();
+                    Sessions.Add(dialog.Id, dialog);
+                }
             }
         }
 
         public static Func<VkApi> NeedApi { get; set; }
-        public static Func<long,Message> NeedMessage { get; set; }
+        public static Func<long, Message> NeedMessage { get; set; }
     }
 }

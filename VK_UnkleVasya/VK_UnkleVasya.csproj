@@ -71,10 +71,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\CommandUtils.cs" />
+    <Compile Include="Commands\StopIntervalDispatchingCommand.cs" />
+    <Compile Include="Commands\StartIntervalDispatchingCommand.cs" />
     <Compile Include="Commands\StartCommand.cs" />
     <Compile Include="DialogSettings.cs" />
     <Compile Include="EroRepository.cs" />
-    <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\Command.cs" />
     <Compile Include="StringConstants.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -109,6 +111,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Commands\StartCommand.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Commands\StartIntervalDispatchingCommand.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Commands\StopIntervalDispatchingCommand.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

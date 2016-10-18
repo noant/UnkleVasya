@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using VK_UnkleVasya.Commands;
 using VkNet;
 using VkNet.Enums.Filters;
 using VkNet.Model;
@@ -22,9 +23,9 @@ namespace VK_UnkleVasya
             //dialogs loading
             DialogSettings.NeedApi = () => vk;
             var allDialogs = vk.Messages.GetDialogs(new MessagesDialogsGetParams()
-                {
-                    Count = vk.Messages.GetDialogs(new MessagesDialogsGetParams(){ Count = 999999999 }).TotalCount
-                });
+            {
+                Count = vk.Messages.GetDialogs(new MessagesDialogsGetParams() { Count = 999999999 }).TotalCount
+            });
             DialogSettings.NeedMessage = (id) => allDialogs.Messages.FirstOrDefault();
 
             //reloader
@@ -54,34 +55,17 @@ namespace VK_UnkleVasya
                         var newMessages = vk.Messages.GetDialogs(new MessagesDialogsGetParams()
                         {
                             Offset = 0,
-                            Count = 200,
+                            Count = 999999999,
                             Unread = true
                         });
 
                         foreach (var message in newMessages.Messages)
                         {
-                            if (!VkUtils.IsResponsePattern(message.Body)) continue;
-
-                            var dialogSettings = GetDialogSettings(message, vk);
-
-                            var query = VkUtils.GetQuery(message.Body);
-
-                            if (VkUtils.IsStartIntervalDispatcherRequest(query))
-                                dialogSettings.NeedStartIntervalDispatch();
-                            else if (VkUtils.IsStopIntervalDispatcherRequest(query))
-                                dialogSettings.NeedStopIntervalDispatch();
-                            else
-                            {
-                                var result = VkUtils.GetNextPicture(vk);
-                                if (result == null)
-                                    VkUtils.SendMessage(vk, message, "Чет я туплю малость.");
-                                else VkUtils.SendImage(vk, message, result, VkUtils.GetNextRandMessage_manual());
-                            }
-
-                            Console.WriteLine(message.Body);
+                            if (CommandUtils.StartCommand.IsIt(message.Body))
+                                CommandUtils.StartCommand.Execute(vk, message, message.Body);
                         }
                     }
-                    Thread.Sleep(400);
+                    Thread.Sleep(333);
                 }
                 catch (Exception e)
                 {
