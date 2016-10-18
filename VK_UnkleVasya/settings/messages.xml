@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<ArrayOfXmlItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <XmlItem>
+    <Key xsi:type="xsd:int">0</Key>
+    <Value xsi:type="xsd:string">На!</Value>
+  </XmlItem>
+  <XmlItem>
+    <Key xsi:type="xsd:int">1</Key>
+    <Value xsi:type="xsd:string">А как вам эта?</Value>
+  </XmlItem>
+  <XmlItem>
+    <Key xsi:type="xsd:int">2</Key>
+    <Value xsi:type="xsd:string">Держите, ребятня!</Value>
+  </XmlItem>
+  <XmlItem>
+    <Key xsi:type="xsd:int">3</Key>
+    <Value xsi:type="xsd:string">По заказам общественности!</Value>
+  </XmlItem>
+  <XmlItem>
+    <Key xsi:type="xsd:int">4</Key>
+    <Value xsi:type="xsd:string">Вот вам:</Value>
+  </XmlItem>
+  <XmlItem>
+    <Key xsi:type="xsd:int">5</Key>
+    <Value xsi:type="xsd:string">Как и подобается, следующая участница у вас на мониторах!</Value>
+  </XmlItem>
+  <XmlItem>
+    <Key xsi:type="xsd:int">6</Key>
+    <Value xsi:type="xsd:string">Фуф)</Value>
+  </XmlItem>
+  <XmlItem>
+    <Key xsi:type="xsd:int">7</Key>
+    <Value xsi:type="xsd:string">Вот это я понимаю!</Value>
+  </XmlItem>
+  <XmlItem>
+    <Key xsi:type="xsd:int">8</Key>
+    <Value xsi:type="xsd:string">)))</Value>
+  </XmlItem>
+  <XmlItem>
+    <Key xsi:type="xsd:int">9</Key>
+    <Value xsi:type="xsd:string">)</Value>
+  </XmlItem>
+  <XmlItem>
+    <Key xsi:type="xsd:int">10</Key>
+    <Value xsi:type="xsd:string">=)</Value>
+  </XmlItem>
+  <XmlItem>
+    <Key xsi:type="xsd:int">11</Key>
+    <Value xsi:type="xsd:string">Воу воу воу!</Value>
+  </XmlItem>
+  <XmlItem>
+    <Key xsi:type="xsd:int">12</Key>
+    <Value xsi:type="xsd:string">Держите!</Value>
+  </XmlItem>
+  <XmlItem>
+    <Key xsi:type="xsd:int">13</Key>
+    <Value xsi:type="xsd:string">Вот это да!</Value>
+  </XmlItem>
+  <XmlItem>
+    <Key xsi:type="xsd:int">14</Key>
+    <Value xsi:type="xsd:string">Следующая!</Value>
+  </XmlItem>
+</ArrayOfXmlItem>

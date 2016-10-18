@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<ArrayOfXmlItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <XmlItem>
+    <Key xsi:type="xsd:int">0</Key>
+    <Value xsi:type="xsd:string">дв</Value>
+  </XmlItem>
+  <XmlItem>
+    <Key xsi:type="xsd:int">1</Key>
+    <Value xsi:type="xsd:string">дядя вася</Value>
+  </XmlItem>
+  <XmlItem>
+    <Key xsi:type="xsd:int">2</Key>
+    <Value xsi:type="xsd:string">васяныч</Value>
+  </XmlItem>
+  <XmlItem>
+    <Key xsi:type="xsd:int">3</Key>
+    <Value xsi:type="xsd:string">дв,</Value>
+  </XmlItem>
+  <XmlItem>
+    <Key xsi:type="xsd:int">4</Key>
+    <Value xsi:type="xsd:string">дядя вася,</Value>
+  </XmlItem>
+  <XmlItem>
+    <Key xsi:type="xsd:int">4</Key>
+    <Value xsi:type="xsd:string">васяныч,</Value>
+  </XmlItem>
+</ArrayOfXmlItem>
