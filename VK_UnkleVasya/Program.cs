@@ -29,6 +29,8 @@ namespace VK_UnkleVasya
             DialogSettings.NeedMessage = (id) => allDialogs.Messages.FirstOrDefault();
 
             //reloader
+            EroRepository.Reload();
+            RandomMessages.Reload();
             var reloaderThread = new Thread(() =>
             {
                 while (true)
