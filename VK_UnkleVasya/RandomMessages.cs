@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace VK_UnkleVasya
+﻿namespace VK_UnkleVasya
 {
     public static class RandomMessages
     {
+        private static object _locker = new object();
         private static string[] _messages;
         private static string[] _messages_interval;
 
         public static string GetNext()
         {
-            lock (_messages)
+            lock (_locker)
             {
                 return _messages[Utils.GetNextRandom(0, _messages.Length - 1)];
             }
@@ -22,7 +16,7 @@ namespace VK_UnkleVasya
 
         public static string GetNext_Interval()
         {
-            lock (_messages)
+            lock (_locker)
             {
                 return _messages_interval[Utils.GetNextRandom(0, _messages_interval.Length - 1)];
             }
@@ -30,7 +24,7 @@ namespace VK_UnkleVasya
 
         public static void Reload()
         {
-            lock (_messages)
+            lock (_locker)
             {
                 _messages = Utils.LoadStringData(StringConstants.RandomMessagesFileName);
                 _messages_interval = Utils.LoadStringData(StringConstants.RandomIntervalMessagesFileName);

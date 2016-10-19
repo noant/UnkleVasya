@@ -24,7 +24,7 @@ namespace VK_UnkleVasya.Commands
 
         public static string ExtractQueryStandart(string[] allKeys, string query)
         {
-            return (query = query.ToLower().Trim()).Substring(allKeys.Single(key => query.StartsWith(key)).Length - 1).Trim();
+            return (query = query.ToLower().Trim()).Substring(allKeys.Single(key => query.StartsWith(key)).Length).Trim();
         }
 
         public static bool IsQueryStartWithAny(string[] allKeys, string query)
@@ -38,7 +38,7 @@ namespace VK_UnkleVasya.Commands
             return Assembly.GetExecutingAssembly().GetTypes().Where(
                 x => x.BaseType.Equals(typeof(Command)) &&
                      !x.GetConstructors().Any(z => z.GetParameters().Any()))
-                .Select(x => (Command)x.GetConstructor(null).Invoke(null))
+                .Select(x => (Command)x.GetConstructor(new Type[0]).Invoke(new object[0]))
                 .ToArray();
         }
 

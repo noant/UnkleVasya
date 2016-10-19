@@ -1,4 +1,5 @@
-﻿using Logging;
+﻿using HierarchicalData;
+using Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,11 +23,7 @@ namespace VK_UnkleVasya
 
             //dialogs loading
             DialogSettings.NeedApi = () => vk;
-            var allDialogs = vk.Messages.GetDialogs(new MessagesDialogsGetParams()
-            {
-                Count = vk.Messages.GetDialogs(new MessagesDialogsGetParams() { Count = 999999999 }).TotalCount
-            });
-            DialogSettings.NeedMessage = (id) => allDialogs.Messages.FirstOrDefault();
+            DialogSettings.NeedMessage = (id) => VkUtils.GetLastMessage(vk, id);
 
             //reloader
             EroRepository.Reload();
@@ -47,6 +44,9 @@ namespace VK_UnkleVasya
             });
             reloaderThread.Start();
 
+            //initialize dialogs settings
+            DialogSettings.LoadSessions();
+
             //main actions
             while (true)
             {
@@ -57,7 +57,7 @@ namespace VK_UnkleVasya
                         var newMessages = vk.Messages.GetDialogs(new MessagesDialogsGetParams()
                         {
                             Offset = 0,
-                            Count = 999999999,
+                            Count = 200,
                             Unread = true
                         });
 
@@ -67,12 +67,15 @@ namespace VK_UnkleVasya
                                 CommandUtils.StartCommand.Execute(vk, message, message.Body);
                         }
                     }
-                    Thread.Sleep(333);
+                    VkUtils.TechnicalSleepForVk();
                 }
                 catch (Exception e)
                 {
                     if (!e.Message.Contains("Flood"))
+                    {
                         Log.Write(e);
+                        Console.WriteLine(e.Message);
+                    }
                 }
             }
         }

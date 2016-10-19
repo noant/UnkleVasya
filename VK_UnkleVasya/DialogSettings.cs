@@ -31,6 +31,8 @@ namespace VK_UnkleVasya
         [XmlIgnore]
         public Message Message { get; set; }
 
+        public int TotalImagesSent { get; set; }
+
         private Thread IntervalDispatcher { get; set; }
 
         public bool IsIntervalDispatcherStarted
@@ -113,7 +115,7 @@ namespace VK_UnkleVasya
         private static readonly Dictionary<long, DialogSettings> Sessions = new Dictionary<long, DialogSettings>();
         public static DialogSettings GetSession(VkApi vk, Message message)
         {
-            var id = (message.ChatId ?? message.UserId).Value * (message.ChatId != null ? -1 : 1);
+            var id = VkUtils.GetId(message);
             if (!Sessions.ContainsKey(id))
                 Sessions.Add(id, new DialogSettings(id, vk, message));
             return Sessions[id];
@@ -132,6 +134,11 @@ namespace VK_UnkleVasya
                     Sessions.Add(dialog.Id, dialog);
                 }
             }
+        }
+
+        static DialogSettings()
+        {
+            HierarchicalObjectCrutch.Register(typeof(DialogSettings));
         }
 
         public static Func<VkApi> NeedApi { get; set; }

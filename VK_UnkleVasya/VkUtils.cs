@@ -1,5 +1,6 @@
 ﻿using HierarchicalData;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using VkNet;
@@ -28,7 +29,7 @@ namespace VK_UnkleVasya
                     }).First().Size;
             }
             var arr = new Photo[count];
-            for (; count > 0; count--)
+            for (int i = 0; i < count; i++)
             {
                 var photo = vk.Photo.Get(new PhotoGetParams()
                 {
@@ -38,8 +39,8 @@ namespace VK_UnkleVasya
                     Count = 1,
                     Offset = (ulong?)Utils.GetNextRandom(0, (int)album.PhotosCount.Value - 1)
                 }).FirstOrDefault();
-                Thread.Sleep(340); //technical sleep for vk
-                arr[count] = photo;
+                arr[i] = photo;
+                TechnicalSleepForVk();
             }
             return arr;
         }
@@ -86,6 +87,7 @@ namespace VK_UnkleVasya
         {
             var sendParams = new MessagesSendParams();
             sendParams.Message = text;
+
             if (message.ChatId == null)
                 sendParams.UserId = message.UserId;
             else
@@ -99,6 +101,46 @@ namespace VK_UnkleVasya
         public static void SendImage(VkApi vk, Message message, Photo photo, string text)
         {
             SendImages(vk, message, new[] { photo }, text);
+        }
+
+        public static Message[] GetAllDialogs(VkApi vk)
+        {
+            var allDialogs = new List<Message>();
+            uint currentDialogsCnt = 1;
+            uint counter = 0;
+            while (currentDialogsCnt != 0)
+            {
+                var dialogs = vk.Messages.GetDialogs(new MessagesDialogsGetParams()
+                {
+                    Count = 200,
+                    Offset = (int)counter
+                });
+                currentDialogsCnt = dialogs.TotalCount;
+                counter += currentDialogsCnt;
+                allDialogs.AddRange(dialogs.Messages);
+                TechnicalSleepForVk();
+            }
+            return allDialogs.ToArray();
+        }
+
+        public static Message GetLastMessage(VkApi vk, long userOrChatId)
+        {
+            return vk.Messages.GetHistory(new MessagesGetHistoryParams()
+            {
+                Count = 1,
+                UserId = userOrChatId,
+                Offset = 0
+            }).Messages.FirstOrDefault();
+        }
+
+        public static long GetId(Message message)
+        {
+            return (message.ChatId ?? message.UserId).Value * (message.ChatId != null ? -1 : 1);
+        }
+
+        public static void TechnicalSleepForVk()
+        {
+            Thread.Sleep(334); // 3 or less request per 1 second
         }
     }
 }
