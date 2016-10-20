@@ -72,6 +72,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdPicturesSettings.cs" />
     <Compile Include="Commands\CommandUtils.cs" />
     <Compile Include="Commands\StopIntervalDispatchingCommand.cs" />
     <Compile Include="Commands\StartIntervalDispatchingCommand.cs" />
@@ -79,7 +80,7 @@
     <Compile Include="DialogSettings.cs" />
     <Compile Include="EroRepository.cs" />
     <Compile Include="Commands\Command.cs" />
-    <Compile Include="AdSettings.cs" />
+    <Compile Include="AdTextSettings.cs" />
     <Compile Include="StringConstants.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -112,7 +113,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="settings\adpictures_settings.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <ItemGroup>
     <None Include="Commands\StartCommand.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -126,6 +131,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Commands\StopIntervalDispatchingCommand.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="settings\adtext_settings.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="settings\adtext_values.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

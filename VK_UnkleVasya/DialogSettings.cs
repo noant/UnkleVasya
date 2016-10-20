@@ -31,7 +31,13 @@ namespace VK_UnkleVasya
         [XmlIgnore]
         public Message Message { get; set; }
 
-        public int TotalImagesSent { get; set; }
+        public int TotalImagesSent { get; set; } //not by interval dispatching
+
+        public void IncrementImgsCountAndCommit()
+        {
+            TotalImagesSent++;
+            SaveToFile();
+        }
 
         private Thread IntervalDispatcher { get; set; }
 
@@ -67,7 +73,7 @@ namespace VK_UnkleVasya
                     {
                         try
                         {
-                            lock (Vk) VkUtils.SendImages(Vk, Message, VkUtils.GetNextPictures(Vk, 5), RandomMessages.GetNext_Interval());
+                            lock (Vk) VkUtils.SendImages(Vk, Message, VkUtils.GetRandomPictures(Vk, 5), VkUtils.GetNextMessageForDialog_Ad(this, true));
                             Thread.Sleep(1000 * 60 * 60);
                         }
                         catch (Exception e)

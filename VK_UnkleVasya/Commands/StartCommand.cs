@@ -11,7 +11,11 @@ namespace VK_UnkleVasya.Commands
             var query = ExtractQuery(sourceQuery);
             var command = CommandUtils.AllCommands.FirstOrDefault(x => x.IsIt(query));
             if (command == null)
-                VkUtils.SendImage(vk, message, VkUtils.GetNextPicture(vk), RandomMessages.GetNext());
+            {
+                var dialog = DialogSettings.GetSession(vk, message);
+                var photoAndText = VkUtils.GetNextPictureAndMessageForDialog_Ad(vk, dialog);
+                VkUtils.SendImage(vk, message, photoAndText.Key, photoAndText.Value);
+            }
             else command.Execute(vk, message, query);
         }
     }

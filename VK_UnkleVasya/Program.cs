@@ -28,6 +28,8 @@ namespace VK_UnkleVasya
             //reloader
             EroRepository.Reload();
             RandomMessages.Reload();
+            AdTextSettings.Reload(vk);
+            AdPicturesSettings.Reload(vk);
             var reloaderThread = new Thread(() =>
             {
                 while (true)
@@ -36,6 +38,8 @@ namespace VK_UnkleVasya
                     {
                         EroRepository.Reload();
                         RandomMessages.Reload();
+                        AdTextSettings.Reload(vk);
+                        AdPicturesSettings.Reload(vk);
                     }
 
                     //Thread.Sleep(10000);
