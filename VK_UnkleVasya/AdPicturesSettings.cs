@@ -39,7 +39,7 @@ namespace VK_UnkleVasya
 
         public static bool IsNeedAd(DialogSettings dialog)
         {
-            return IsAllow && dialog.TotalImagesSent > Interval && dialog.TotalImagesSent%Interval == 0;
+            return IsAllow && dialog.TotalImagesSent >= Interval && dialog.TotalImagesSent%Interval == 0;
         }
 
         public static Photo GetNextPicAndCommit(VkApi vk)
