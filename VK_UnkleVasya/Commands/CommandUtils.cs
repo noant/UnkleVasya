@@ -24,7 +24,11 @@ namespace VK_UnkleVasya.Commands
 
         public static string ExtractQueryStandart(string[] allKeys, string query)
         {
-            return (query = query.ToLower().Trim()).Substring(allKeys.Single(key => query.StartsWith(key)).Length).Trim();
+            query = query.ToLower().Trim();
+            var acceptKeys = allKeys.Where(key => query.StartsWith(key));
+            if (!acceptKeys.Any())
+                return query;
+            return query.Substring(acceptKeys.Max(x => x.Length)).Trim();
         }
 
         public static bool IsQueryStartWithAny(string[] allKeys, string query)

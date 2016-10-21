@@ -37,7 +37,7 @@ namespace VK_UnkleVasya
             if (album.PhotosCount == null)
                 PrepareAlbumSize(vk, album);
 
-            return GetPicture(vk, album, Utils.GetNextRandom(0, (int) album.PhotosCount.Value - 1), Utils.GetNextRandom(0, 1) == 0);
+            return GetPicture(vk, album, Utils.GetNextRandom(0, (int)album.PhotosCount.Value - 1), Utils.GetNextRandom(0, 1) == 0);
         }
 
         public static Photo GetPicture(VkApi vk, Album album, int index, bool fromEnd)
@@ -57,7 +57,7 @@ namespace VK_UnkleVasya
 
         public static void PrepareAlbumSize(VkApi vk, Album album)
         {
-            album.PhotosCount = 
+            album.PhotosCount =
                 vk.Photo.GetAlbums(new PhotoGetAlbumsParams()
                 {
                     AlbumIds = new[] { album.Id },
@@ -119,34 +119,32 @@ namespace VK_UnkleVasya
             SendImages(vk, message, new[] { photo }, text);
         }
 
-        public static Message[] GetAllDialogs(VkApi vk)
+        private static Message[] _allDialogs;
+        private static Message[] GetAllDialogs(VkApi vk)
         {
-            var allDialogs = new List<Message>();
-            uint currentDialogsCnt = 1;
-            uint counter = 0;
-            while (currentDialogsCnt != 0)
+            var messages = new List<Message>();
+            int counter = 0;
+            while (counter >= 0)
             {
-                var dialogs = vk.Messages.GetDialogs(new MessagesDialogsGetParams()
+                var current = vk.Messages.GetDialogs(new MessagesDialogsGetParams()
                 {
                     Count = 200,
-                    Offset = (int)counter
+                    Offset = counter
                 });
-                currentDialogsCnt = dialogs.TotalCount;
-                counter += currentDialogsCnt;
-                allDialogs.AddRange(dialogs.Messages);
+                counter += 200;
+                if (!current.Messages.Any())
+                    counter = -1;
+                else messages.AddRange(current.Messages);
                 TechnicalSleepForVk();
             }
-            return allDialogs.ToArray();
+            return messages.ToArray();
         }
 
         public static Message GetLastMessage(VkApi vk, long userOrChatId)
         {
-            return vk.Messages.GetHistory(new MessagesGetHistoryParams()
-            {
-                Count = 1,
-                UserId = userOrChatId,
-                Offset = 0
-            }).Messages.FirstOrDefault();
+            if (_allDialogs == null)
+                _allDialogs = GetAllDialogs(vk);
+            return _allDialogs.FirstOrDefault(x => GetId(x).Equals(userOrChatId));
         }
 
         public static long GetId(Message message)
@@ -171,7 +169,7 @@ namespace VK_UnkleVasya
             }
             dialog.IncrementImgsCountAndCommit();
 
-            return new KeyValuePair<Photo, string>(photo,message);
+            return new KeyValuePair<Photo, string>(photo, message);
         }
 
         public static string GetNextMessageForDialog_Ad(DialogSettings dialog, bool isMessageForIntervalDispatching)
@@ -183,6 +181,11 @@ namespace VK_UnkleVasya
                 result = isMessageForIntervalDispatching ? RandomMessages.GetNext_Interval() : RandomMessages.GetNext();
 
             return result;
+        }
+
+        public static bool IsChat(Message message)
+        {
+            return message.ChatId != null;
         }
 
         public static void TechnicalSleepForVk()

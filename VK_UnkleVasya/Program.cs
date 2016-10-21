@@ -67,7 +67,7 @@ namespace VK_UnkleVasya
 
                         foreach (var message in newMessages.Messages)
                         {
-                            if (CommandUtils.StartCommand.IsIt(message.Body))
+                            if (!VkUtils.IsChat(message) || CommandUtils.StartCommand.IsIt(message.Body))
                                 CommandUtils.StartCommand.Execute(vk, message, message.Body);
                         }
                     }

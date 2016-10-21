@@ -98,6 +98,7 @@
     </None>
     <None Include="settings\credentials.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="settings\albums.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
