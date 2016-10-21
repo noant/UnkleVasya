@@ -52,7 +52,7 @@ namespace VK_UnkleVasya
                 Reversed = fromEnd,
                 Count = 1,
                 Offset = (ulong)index
-            }).FirstOrDefault();
+            }, false).FirstOrDefault();
         }
 
         public static void PrepareAlbumSize(VkApi vk, Album album)
@@ -62,8 +62,8 @@ namespace VK_UnkleVasya
                 {
                     AlbumIds = new[] { album.Id },
                     Count = 1,
-                    OwnerId = album.GroupId * -1,
-                }).First().Size;
+                    OwnerId = album.GroupId * -1
+                }, false).First().Size;
         }
 
         public static ApiAuthParams GetCredentials()
@@ -158,7 +158,7 @@ namespace VK_UnkleVasya
         {
             Photo photo = null;
             string message = null;
-            if (AdTextSettings.IsNeedAd(dialog))
+            if (AdPicturesSettings.IsNeedAd(dialog))
             {
                 photo = AdPicturesSettings.GetNextPicAndCommit(vk);
                 if (photo != null)

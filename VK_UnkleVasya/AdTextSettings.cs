@@ -26,6 +26,7 @@ namespace VK_UnkleVasya
             var hData = new HierarchicalObject(StringConstants.AdTextSettingsFileName);
             hData[0] = Interval;
             hData[1] = ValuePosition;
+            hData[2] = IsAllow;
             hData.SaveToFile();
         }
 
@@ -36,7 +37,7 @@ namespace VK_UnkleVasya
 
         public static bool IsNeedAd(DialogSettings dialog)
         {
-            return IsAllow && dialog.TotalImagesSent % Interval == 0;
+            return IsAllow && dialog.TotalImagesSent >= Interval && dialog.TotalImagesSent % Interval == 0;
         }
 
         public static string GetNextStringAndCommit()

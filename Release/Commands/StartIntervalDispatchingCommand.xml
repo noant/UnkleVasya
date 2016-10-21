@@ -2,18 +2,14 @@
 <ArrayOfXmlItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <XmlItem>
     <Key xsi:type="xsd:int">0</Key>
-    <Value xsi:type="xsd:string">https://vk.com/album-131218851_237374218</Value>
+    <Value xsi:type="xsd:string">качай интервалом</Value>
   </XmlItem>
   <XmlItem>
     <Key xsi:type="xsd:int">1</Key>
-    <Value xsi:type="xsd:int">30</Value>
+    <Value xsi:type="xsd:string">давай интервалом</Value>
   </XmlItem>
   <XmlItem>
     <Key xsi:type="xsd:int">2</Key>
-    <Value xsi:type="xsd:int">0</Value>
-  </XmlItem>
-  <XmlItem>
-    <Key xsi:type="xsd:int">3</Key>
-    <Value xsi:type="xsd:boolean">true</Value>
+    <Value xsi:type="xsd:string">жги интервалом</Value>
   </XmlItem>
 </ArrayOfXmlItem>

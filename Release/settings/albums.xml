@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<ArrayOfXmlItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <XmlItem>
+    <Key xsi:type="xsd:int">0</Key>
+    <Value xsi:type="EroRepository">
+      <Albums>
+        <Album>
+          <Link>https://vk.com/album-33963489_180549306</Link>
+        </Album>
+      </Albums>
+    </Value>
+  </XmlItem>
+</ArrayOfXmlItem>
