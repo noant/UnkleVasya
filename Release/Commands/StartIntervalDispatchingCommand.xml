@@ -12,4 +12,12 @@
     <Key xsi:type="xsd:int">2</Key>
     <Value xsi:type="xsd:string">жги интервалом</Value>
   </XmlItem>
+  <XmlItem>
+    <Key xsi:type="xsd:int">1</Key>
+    <Value xsi:type="xsd:string">давай с интервалом</Value>
+  </XmlItem>
+  <XmlItem>
+    <Key xsi:type="xsd:int">1</Key>
+    <Value xsi:type="xsd:string">с интервалом</Value>
+  </XmlItem>
 </ArrayOfXmlItem>

@@ -2,54 +2,50 @@
 <ArrayOfXmlItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <XmlItem>
     <Key xsi:type="xsd:int">0</Key>
-    <Value xsi:type="xsd:string">дв </Value>
+    <Value xsi:type="xsd:string">по * часу</Value>
   </XmlItem>
   <XmlItem>
     <Key xsi:type="xsd:int">1</Key>
-    <Value xsi:type="xsd:string">дядя вася</Value>
+    <Value xsi:type="xsd:string">по * часа</Value>
   </XmlItem>
   <XmlItem>
     <Key xsi:type="xsd:int">2</Key>
-    <Value xsi:type="xsd:string">васяныч</Value>
+    <Value xsi:type="xsd:string">по * часов</Value>
   </XmlItem>
   <XmlItem>
     <Key xsi:type="xsd:int">3</Key>
-    <Value xsi:type="xsd:string">дв,</Value>
+    <Value xsi:type="xsd:string">по *часу</Value>
   </XmlItem>
   <XmlItem>
     <Key xsi:type="xsd:int">4</Key>
-    <Value xsi:type="xsd:string">дв ,</Value>
+    <Value xsi:type="xsd:string">по *часа</Value>
   </XmlItem>
   <XmlItem>
     <Key xsi:type="xsd:int">5</Key>
-    <Value xsi:type="xsd:string">дв .</Value>
+    <Value xsi:type="xsd:string">по*часов</Value>
   </XmlItem>
   <XmlItem>
     <Key xsi:type="xsd:int">6</Key>
-    <Value xsi:type="xsd:string">дв.</Value>
+    <Value xsi:type="xsd:string">по*часу</Value>
   </XmlItem>
   <XmlItem>
     <Key xsi:type="xsd:int">7</Key>
-    <Value xsi:type="xsd:string">дядя вася,</Value>
+    <Value xsi:type="xsd:string">по*часа</Value>
   </XmlItem>
   <XmlItem>
     <Key xsi:type="xsd:int">8</Key>
-    <Value xsi:type="xsd:string">васяныч,</Value>
+    <Value xsi:type="xsd:string">по*часов</Value>
   </XmlItem>
   <XmlItem>
     <Key xsi:type="xsd:int">9</Key>
-    <Value xsi:type="xsd:string">вася </Value>
+    <Value xsi:type="xsd:string">по* часу</Value>
   </XmlItem>
   <XmlItem>
     <Key xsi:type="xsd:int">10</Key>
-    <Value xsi:type="xsd:string">вася,</Value>
+    <Value xsi:type="xsd:string">по* часа</Value>
   </XmlItem>
   <XmlItem>
     <Key xsi:type="xsd:int">11</Key>
-    <Value xsi:type="xsd:string">вась</Value>
-  </XmlItem>
-  <XmlItem>
-    <Key xsi:type="xsd:int">12</Key>
-    <Value xsi:type="xsd:string">вась,</Value>
+    <Value xsi:type="xsd:string">по* часов</Value>
   </XmlItem>
 </ArrayOfXmlItem>
