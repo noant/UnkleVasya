@@ -17,5 +17,6 @@
         public static string Dialog_IntervalAlwaysDoResponse = "Так то уже херачу по интервалу, слепой чтоли?";
         public static string Dialog_IntervalAlwaysNotDoResponse = "А я и не начинал. Тупень.";
         public static string Dialog_IntervalOkStopResponse = "Прекращаю, шеф.";
+        public static string Dialog_IntervalCannotBeLessThan1 = "Интервал не может быть меньше 1 часа! Я уже не молод и просто быстро устану!";
     }
 }

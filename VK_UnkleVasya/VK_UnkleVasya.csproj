@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="AdPicturesSettings.cs" />
     <Compile Include="Commands\CommandUtils.cs" />
+    <Compile Include="Commands\SetIntervalValueCommand.cs" />
     <Compile Include="Commands\StopIntervalDispatchingCommand.cs" />
     <Compile Include="Commands\StartIntervalDispatchingCommand.cs" />
     <Compile Include="Commands\StartCommand.cs" />
@@ -142,6 +143,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="settings\adtext_values.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Commands\SetIntervalValueCommand.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

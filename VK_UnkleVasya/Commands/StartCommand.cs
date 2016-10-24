@@ -4,7 +4,7 @@ using VkNet.Model;
 
 namespace VK_UnkleVasya.Commands
 {
-    class StartCommand : Command
+    public class StartCommand : Command
     {
         public override void Execute(VkApi vk, Message message, string sourceQuery)
         {

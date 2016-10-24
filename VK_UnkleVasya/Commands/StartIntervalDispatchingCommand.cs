@@ -3,7 +3,7 @@ using VkNet.Model;
 
 namespace VK_UnkleVasya.Commands
 {
-    class StartIntervalDispatchingCommand : Command
+    public class StartIntervalDispatchingCommand : Command
     {
         public override void Execute(VkApi vk, Message message, string sourceQuery)
         {
