@@ -13,8 +13,7 @@
         public static string AdTextValuesFileName = "settings/adtext_values.xml";
         public static string ExceptSessionFilename = "folder_contains_session_files";
 
-        public static string Dialog_IntervalOkResponse = "Понял, командир.";
-        public static string Dialog_IntervalAlwaysDoResponse = "Так то уже херачу по интервалу, слепой чтоли?";
+        public static string Dialog_IntervalOkResponse = "Понял, командир. Теперь работаю с интервалом в #0 час(ов)";
         public static string Dialog_IntervalAlwaysNotDoResponse = "А я и не начинал. Тупень.";
         public static string Dialog_IntervalOkStopResponse = "Прекращаю, шеф.";
         public static string Dialog_IntervalCannotBeLessThan1 = "Интервал не может быть меньше 1 часа! Я уже не молод и просто быстро устану!";

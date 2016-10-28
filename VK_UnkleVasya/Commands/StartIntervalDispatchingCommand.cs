@@ -1,5 +1,6 @@
 ﻿using VkNet;
 using VkNet.Model;
+using System.Linq;
 
 namespace VK_UnkleVasya.Commands
 {
@@ -7,7 +8,16 @@ namespace VK_UnkleVasya.Commands
     {
         public override void Execute(VkApi vk, Message message, string sourceQuery)
         {
-            DialogSettings.GetSession(vk, message).StartIntervalDispatching();
+            var setIntervalCommand = CommandUtils.AllCommands.Single(x => x is SetIntervalValueCommand);
+            var extractedQuery = this.ExtractQuery(sourceQuery);
+            if (setIntervalCommand.IsIt(extractedQuery))
+                setIntervalCommand.Execute(vk, message, extractedQuery);
+            else
+            {
+                var session = DialogSettings.GetSession(vk, message);
+                session.IntervalDispatchingValue = 1;
+                session.StartIntervalDispatching();
+            }
         }
     }
 }

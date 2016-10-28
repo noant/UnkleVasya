@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Windows.Input;
 using HierarchicalData;
 using System.Globalization;
 
@@ -13,7 +12,7 @@ namespace VK_UnkleVasya
         {
             if (_randomizer == null)
                 _randomizer = new Random();
-            return _randomizer.Next(from, to);
+            return _randomizer.Next(from, to + 1);
         }
 
         public static string[] LoadStringData(string file)
@@ -26,7 +25,7 @@ namespace VK_UnkleVasya
         {
             if (target.Trim().Length != target.Length) return null;
             decimal value;
-            if (decimal.TryParse(target.Replace(",","."), NumberStyles.Number, NumberFormatInfo.InvariantInfo, out value))
+            if (decimal.TryParse(target.Replace(",", "."), NumberStyles.Number, NumberFormatInfo.InvariantInfo, out value))
                 return value;
             return null;
         }
@@ -38,6 +37,13 @@ namespace VK_UnkleVasya
             if (indexOfStart > 0 && indexOfEnd > 0 && indexOfStart < indexOfEnd)
                 return targetString.Substring(indexOfStart, indexOfEnd - indexOfStart);
             return string.Empty;
+        }
+
+        public static string Set(this string value, params object[] objects)
+        {
+            for (int i = 0; i < objects.Count(); i++)
+                value = value.Replace("#" + i.ToString(), objects[i].ToString());
+            return value;
         }
     }
 }

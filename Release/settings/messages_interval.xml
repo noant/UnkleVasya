@@ -2,16 +2,16 @@
 <ArrayOfXmlItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <XmlItem>
     <Key xsi:type="xsd:int">0</Key>
-    <Value xsi:type="xsd:string">Девушки часа!</Value>
+    <Value xsi:type="xsd:string">Новая партия на ваших экранах!</Value>
   </XmlItem>
   <XmlItem>
     <Key xsi:type="xsd:int">1</Key>
-    <Value xsi:type="xsd:string">Периодическое издание журнала \"Смотри какая самка!\""
+    <Value xsi:type="xsd:string">Периодическое издание журнала "Смотри какая самка!"
     </Value>
   </XmlItem>
   <XmlItem>
     <Key xsi:type="xsd:int">2</Key>
-    <Value xsi:type="xsd:string">Каждый час будут такие девы!</Value>
+    <Value xsi:type="xsd:string">Новый выпуск журнала FapTime</Value>
   </XmlItem>
   <XmlItem>
     <Key xsi:type="xsd:int">3</Key>

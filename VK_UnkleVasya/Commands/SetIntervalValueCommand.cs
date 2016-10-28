@@ -24,8 +24,14 @@ namespace VK_UnkleVasya.Commands
 
             if (value < 1)
                 VkUtils.SendMessage(vk, message, StringConstants.Dialog_IntervalCannotBeLessThan1);
+            else
+            {
+                var session = DialogSettings.GetSession(vk, message);
+                session.IntervalDispatchingValue = value;
+                session.StartIntervalDispatching();
+            }
         }
-        
+
         public decimal ExtractValue(string targetQuery)
         {
             return (Extract(targetQuery) ?? new ExtractionResult() { Value = 0 }).Value;
@@ -37,7 +43,7 @@ namespace VK_UnkleVasya.Commands
             if (extracted == null) return query;
             return query.Substring(extracted.Query.Length);
         }
-        
+
         public ExtractionResult Extract(string query)
         {
             query = query.ToLower();
