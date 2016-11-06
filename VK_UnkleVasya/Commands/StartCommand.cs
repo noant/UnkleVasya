@@ -14,7 +14,7 @@ namespace VK_UnkleVasya.Commands
             {
                 var dialog = DialogSettings.GetSession(vk, message);
                 var photoAndText = VkUtils.GetNextPictureAndMessageForDialog_Ad(vk, dialog);
-                VkUtils.SendImage(vk, message, photoAndText.Key, photoAndText.Value);
+                VkNet.VkUtils.SendImage(vk, message, photoAndText.Key, photoAndText.Value);
             }
             else command.Execute(vk, message, query);
         }

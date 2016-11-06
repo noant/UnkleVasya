@@ -15,10 +15,11 @@ namespace VK_UnkleVasya
 {
     class Program
     {
+        [STAThread]
         static void Main(string[] args)
         {
             //authorization
-            var vk = new VkApi();
+            var vk = new VkApi(new VkCaptchaSolver.VkCaptchaSolver());
             vk.Authorize(VkUtils.GetCredentials());
 
             //dialogs loading
@@ -67,11 +68,11 @@ namespace VK_UnkleVasya
 
                         foreach (var message in newMessages.Messages)
                         {
-                            if (!VkUtils.IsChat(message) || CommandUtils.StartCommand.IsIt(message.Body))
+                            if (!VkNet.VkUtils.IsChat(message) || CommandUtils.StartCommand.IsIt(message.Body))
                                 CommandUtils.StartCommand.Execute(vk, message, message.Body);
                         }
                     }
-                    VkUtils.TechnicalSleepForVk();
+                    VkNet.VkUtils.TechnicalSleepForVk();
                 }
                 catch (Exception e)
                 {

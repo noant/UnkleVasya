@@ -35,7 +35,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.5, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="VkNet, Version=1.21.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VkNet.1.25.0\lib\net40\VkNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -57,10 +69,25 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\VkCaptchaSolver\VkCaptchaSolver.csproj">
+      <Project>{be618d81-d881-4965-ad50-a8a0c1c74341}</Project>
+      <Name>VkCaptchaSolver</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VkNetUtilsUiControls\VkNetUtilsUiControls.csproj">
+      <Project>{a2011356-99a5-4af0-aa38-961409a6822c}</Project>
+      <Name>VkNetUtilsUiControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VkNetUtils\VkNetUtils.csproj">
+      <Project>{4850006b-52ff-4b26-9323-6ccdcf5615d2}</Project>
+      <Name>VkNetUtils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VK_UnkleVasya\VK_UnkleVasya.csproj">
       <Project>{b6461244-746d-49e0-ace9-69cf19dc3137}</Project>
       <Name>VK_UnkleVasya</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

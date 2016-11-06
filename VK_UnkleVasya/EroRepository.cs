@@ -39,7 +39,8 @@ namespace VK_UnkleVasya
 
         [XmlIgnore]
         public long Id { get; private set; }
-        
+
+        [XmlIgnore]
         public long? PhotosCount { get; set; }
 
         public Album()

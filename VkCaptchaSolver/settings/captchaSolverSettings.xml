@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<ArrayOfXmlItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <XmlItem>
+    <Key xsi:type="xsd:int">0</Key>
+    <Value xsi:type="Settings">
+      <ApplicationId>5662657</ApplicationId>
+      <Login></Login>
+      <Password></Password>
+      <Timeout>120000</Timeout>
+    </Value>
+  </XmlItem>
+</ArrayOfXmlItem>

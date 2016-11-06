@@ -23,7 +23,7 @@ namespace VK_UnkleVasya.Commands
             var value = ExtractValue(targetQuery);
 
             if (value < 1)
-                VkUtils.SendMessage(vk, message, StringConstants.Dialog_IntervalCannotBeLessThan1);
+                VkNet.VkUtils.SendMessage(vk, message, StringConstants.Dialog_IntervalCannotBeLessThan1);
             else
             {
                 var session = DialogSettings.GetSession(vk, message);

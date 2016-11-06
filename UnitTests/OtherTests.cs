@@ -18,5 +18,19 @@ namespace UnitTests
         {
             Debug.WriteLine(Utils.GetValueBetween("asb 44 rr", "asb", "rr"));
         }
+
+        [TestMethod]
+        public void TestCaptchaSolver()
+        {
+            var cs = new VkCaptchaSolver.VkCaptchaSolver();
+            var res = cs.Solve("http://vk");
+            Debug.WriteLine(res);
+        }
+
+        [TestMethod]
+        public void TestGetIdByScreenName()
+        {
+            Debug.WriteLine(VkNet.VkUtils.GetUserIdByUriName(VkCaptchaSolver.VkCaptchaSolver.Vk, "anton.novgorodcev"));
+        }
     }
 }

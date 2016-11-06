@@ -68,7 +68,7 @@ namespace VK_UnkleVasya
                     {
                         try
                         {
-                            lock (Vk) VkUtils.SendImages(Vk, Message, VkUtils.GetRandomPictures(Vk, 5), VkUtils.GetNextMessageForDialog_Ad(this, true));
+                            lock (Vk) VkNet.VkUtils.SendImages(Vk, Message, VkUtils.GetRandomPictures(Vk, 5), VkUtils.GetNextMessageForDialog_Ad(this, true));
                             Thread.Sleep((int)(1000 * 60 * 60 * IntervalDispatchingValue));
                         }
                         catch (Exception e)
@@ -80,7 +80,7 @@ namespace VK_UnkleVasya
                 IsIntervalDispatcherStarted = true;
                 IntervalDispatcher.Start();
                 if (sendMessage)
-                    lock (Vk) VkUtils.SendMessage(Vk, Message, StringConstants.Dialog_IntervalOkResponse.Set(IntervalDispatchingValue));
+                    lock (Vk) VkNet.VkUtils.SendMessage(Vk, Message, StringConstants.Dialog_IntervalOkResponse.Set(IntervalDispatchingValue));
                 if (save)
                     SaveToFile();
             }
@@ -94,7 +94,7 @@ namespace VK_UnkleVasya
                 IntervalDispatcher = null;
 
                 if (sendMessage)
-                    lock (Vk) VkUtils.SendMessage(Vk, Message, StringConstants.Dialog_IntervalOkStopResponse);
+                    lock (Vk) VkNet.VkUtils.SendMessage(Vk, Message, StringConstants.Dialog_IntervalOkStopResponse);
 
                 IsIntervalDispatcherStarted = true;
 
@@ -102,7 +102,7 @@ namespace VK_UnkleVasya
                     SaveToFile();
 
             }
-            else if (sendMessage) VkUtils.SendMessage(Vk, Message, StringConstants.Dialog_IntervalAlwaysNotDoResponse);
+            else if (sendMessage) VkNet.VkUtils.SendMessage(Vk, Message, StringConstants.Dialog_IntervalAlwaysNotDoResponse);
         }
 
         public void StartIntervalDispatching()

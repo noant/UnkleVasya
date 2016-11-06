@@ -1,11 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VK_UnkleVasya", "VK_UnkleVasya\VK_UnkleVasya.csproj", "{B6461244-746D-49E0-ACE9-69CF19DC3137}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{DF24D958-74E9-48BA-82A8-9510664295FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VkNetUtilsUiControls", "VkNetUtilsUiControls\VkNetUtilsUiControls.csproj", "{A2011356-99A5-4AF0-AA38-961409A6822C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VkCaptchaSolver", "VkCaptchaSolver\VkCaptchaSolver.csproj", "{BE618D81-D881-4965-AD50-A8A0C1C74341}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VkNetUtils", "VkNetUtils\VkNetUtils.csproj", "{4850006B-52FF-4B26-9323-6CCDCF5615D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{DF24D958-74E9-48BA-82A8-9510664295FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF24D958-74E9-48BA-82A8-9510664295FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF24D958-74E9-48BA-82A8-9510664295FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2011356-99A5-4AF0-AA38-961409A6822C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2011356-99A5-4AF0-AA38-961409A6822C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2011356-99A5-4AF0-AA38-961409A6822C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2011356-99A5-4AF0-AA38-961409A6822C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE618D81-D881-4965-AD50-A8A0C1C74341}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE618D81-D881-4965-AD50-A8A0C1C74341}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE618D81-D881-4965-AD50-A8A0C1C74341}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE618D81-D881-4965-AD50-A8A0C1C74341}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4850006B-52FF-4B26-9323-6CCDCF5615D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4850006B-52FF-4B26-9323-6CCDCF5615D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4850006B-52FF-4B26-9323-6CCDCF5615D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4850006B-52FF-4B26-9323-6CCDCF5615D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
