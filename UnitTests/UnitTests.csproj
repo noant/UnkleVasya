@@ -67,6 +67,7 @@
     <Compile Include="IntervalValue_IsIt_Test.cs" />
     <Compile Include="OtherTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VkPhotoAlbumIdErrorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VkCaptchaSolver\VkCaptchaSolver.csproj">

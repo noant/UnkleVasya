@@ -73,7 +73,12 @@ namespace VK_UnkleVasya
                         }
                         catch (Exception e)
                         {
-                            Log.Write(e);
+                            if (!(e is ThreadAbortException))
+                            {
+                                Log.Write(e);
+                                Console.WriteLine("Dialog " + this.Id + " error. Stopped.");
+                                break;
+                            }
                         }
                     }
                 });
@@ -139,9 +144,12 @@ namespace VK_UnkleVasya
                     var hData = HierarchicalObject.FromFile(filename);
                     DialogSettings dialog = hData[0];
                     dialog.Message = NeedMessage(dialog.Id);
-                    dialog.Vk = NeedApi();
-                    Sessions.Add(dialog.Id, dialog);
-                    dialog.Initialize();
+                    if (dialog.Message != null)
+                    {
+                        dialog.Vk = NeedApi();
+                        Sessions.Add(dialog.Id, dialog);
+                        dialog.Initialize();
+                    }
                 }
             }
         }

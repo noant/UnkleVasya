@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using VK_UnkleVasya;
+using VkNet.Enums.SafetyEnums;
 
 namespace UnitTests
 {
@@ -16,7 +17,7 @@ namespace UnitTests
         [TestMethod]
         public void TestMethod()
         {
-            Debug.WriteLine(Utils.GetValueBetween("asb 44 rr", "asb", "rr"));
+            PhotoAlbumType.Id(237935674);
         }
 
         [TestMethod]
@@ -31,6 +32,14 @@ namespace UnitTests
         public void TestGetIdByScreenName()
         {
             Debug.WriteLine(VkNet.VkUtils.GetUserIdByUriName(VkCaptchaSolver.VkCaptchaSolver.Vk, "anton.novgorodcev"));
+        }
+
+
+        [TestMethod]
+        public void TestSendImg()
+        {
+            var userId = VkNet.VkUtils.GetUserIdByUriName(VkCaptchaSolver.VkCaptchaSolver.Vk, "anton.novgorodcev");
+            //VkNet.VkUtils.SendImage(VkCaptchaSolver.VkCaptchaSolver.Vk, userId.Value, @"D:\Pictures\Wallpapers\Разное_3\1f5ea29477.jpg");
         }
     }
 }

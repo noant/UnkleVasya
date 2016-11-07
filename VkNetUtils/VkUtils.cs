@@ -1,6 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -87,5 +91,26 @@ namespace VkNet
         {
             return vk.Utils.ResolveScreenName(name).Id;
         }
+
+        //public static void SendImage(VkApi vk, long userId, string filePath)
+        //{
+        //    var serverInfo = vk.Photo.GetMessagesUploadServer();
+
+        //    var uploader = new WebClient();
+        //    var responseStr = Encoding.UTF8.GetString(uploader.UploadFile(serverInfo.UploadUrl, filePath));
+        //    var responseJson = (JObject)JsonConvert.DeserializeObject(responseStr);
+        //    Debug.Write(responseStr);
+        //    var hash = responseJson["hash"].ToString();
+        //    var server = responseJson["server"].ToString();
+        //    var photo = responseJson["photo"];
+
+        //    var photoVk = new Photo();
+        //    photoVk.Id = long.Parse(photo["Id"].ToString());
+
+        //    var values = new Dictionary<string, string>();
+        //    values.Add("user_id", userId.ToString());
+        //    values.Add("attachment", photo);
+        //    vk.Invoke("messages.send", values);
+        //}
     }
 }

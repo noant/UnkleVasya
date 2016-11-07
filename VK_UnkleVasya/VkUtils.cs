@@ -1,15 +1,19 @@
 ﻿using HierarchicalData;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security;
 using System.Threading;
 using VkNet;
+using VkNet.Categories;
 using VkNet.Enums.Filters;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model;
 using VkNet.Model.Attachments;
 using VkNet.Model.RequestParams;
+using VkNet.Utils;
 
 namespace VK_UnkleVasya
 {
@@ -45,14 +49,16 @@ namespace VK_UnkleVasya
             if (album.PhotosCount == null)
                 PrepareAlbumSize(vk, album);
 
-            return vk.Photo.Get(new PhotoGetParams()
-            {
-                AlbumId = PhotoAlbumType.Id(album.Id),
-                OwnerId = album.GroupId * -1,
-                Reversed = fromEnd,
-                Count = 1,
-                Offset = (ulong)index
-            }, false).FirstOrDefault();
+            var valuesDictionary = new Dictionary<string, string>();
+            valuesDictionary["album_id"] = album.Id.ToString();
+            valuesDictionary["owner_id"] = (album.GroupId * -1).ToString();
+            valuesDictionary["rev"] = (fromEnd ? 1 : 0).ToString();
+            valuesDictionary["offset"] = index.ToString();
+            valuesDictionary["count"] = "1";
+
+            var jToken = JToken.Parse(vk.Invoke("photos.get", valuesDictionary).Replace("{{", "{").Replace("}}", "}"))["response"][0];
+            var photo = PhotoFromJson(new VkResponse(jToken));
+            return photo;
         }
 
         public static void PrepareAlbumSize(VkApi vk, Album album)
@@ -122,6 +128,76 @@ namespace VK_UnkleVasya
                 result = isMessageForIntervalDispatching ? RandomMessages.GetNext_Interval() : RandomMessages.GetNext();
 
             return result;
+        }
+
+        internal static Photo PhotoFromJson(VkResponse response)
+        {
+            Photo photo = new Photo();
+            long? nullable1 = (long?)(response[(object)"photo_id"] ?? response[(object)"pid"] ?? response[(object)"id"]);
+            photo.Id = nullable1;
+            long? nullable2 = (long?)(response[(object)"album_id"] ?? response[(object)"aid"]);
+            photo.AlbumId = nullable2;
+            long? nullable3 = (long?)response[(object)"owner_id"];
+            photo.OwnerId = nullable3;
+            Uri uri1 = (Uri)(response[(object)"photo_75"] ?? response[(object)"src_small"]);
+            photo.Photo75 = uri1;
+            Uri uri2 = (Uri)(response[(object)"photo_130"] ?? response[(object)"src"]);
+            photo.Photo130 = uri2;
+            Uri uri3 = (Uri)(response[(object)"photo_604"] ?? response[(object)"src_big"]);
+            photo.Photo604 = uri3;
+            Uri uri4 = (Uri)(response[(object)"photo_807"] ?? response[(object)"src_xbig"]);
+            photo.Photo807 = uri4;
+            Uri uri5 = (Uri)(response[(object)"photo_1280"] ?? response[(object)"src_xxbig"]);
+            photo.Photo1280 = uri5;
+            Uri uri6 = (Uri)(response[(object)"photo_2560"] ?? response[(object)"src_xxxbig"]);
+            photo.Photo2560 = uri6;
+            int? nullable4 = (int?)response[(object)"width"];
+            photo.Width = nullable4;
+            int? nullable5 = (int?)response[(object)"height"];
+            photo.Height = nullable5;
+            string str1 = (string)response[(object)"text"];
+            photo.Text = str1;
+            DateTime? nullable6 = (DateTime?)(response[(object)"date"] ?? response[(object)"created"]);
+            photo.CreateTime = nullable6;
+            long? nullableLongId1 = GetNullableLongId(response[(object)"user_id"]);
+            photo.UserId = nullableLongId1;
+            long? nullableLongId2 = GetNullableLongId(response[(object)"post_id"]);
+            photo.PostId = nullableLongId2;
+            string str2 = (string)response[(object)"access_key"];
+            photo.AccessKey = str2;
+            long? nullableLongId3 = GetNullableLongId(response[(object)"placer_id"]);
+            photo.PlacerId = nullableLongId3;
+            DateTime? nullable7 = (DateTime?)response[(object)"tag_created"];
+            photo.TagCreated = nullable7;
+            long? nullable8 = (long?)response[(object)"tag_id"];
+            photo.TagId = nullable8;
+            Likes likes = (Likes)response[(object)"likes"];
+            photo.Likes = likes;
+            Comments comments = (Comments)response[(object)"comments"];
+            photo.Comments = comments;
+            bool? nullable9 = (bool?)response[(object)"can_comment"];
+            photo.CanComment = nullable9;
+            Tags tags = (Tags)response[(object)"tags"];
+            photo.Tags = tags;
+            Uri uri7 = (Uri)response[(object)"photo_src"];
+            photo.PhotoSrc = uri7;
+            string str3 = (string)response[(object)"photo_hash"];
+            photo.PhotoHash = str3;
+            Uri uri8 = (Uri)response[(object)"src_small"];
+            photo.SmallPhotoSrc = uri8;
+            float? nullable10 = (float?)response[(object)"lat"];
+            double? nullable11 = nullable10.HasValue ? new double?((double)nullable10.GetValueOrDefault()) : new double?();
+            photo.Latitude = nullable11;
+            nullable10 = (float?)response[(object)"long"];
+            double? nullable12 = nullable10.HasValue ? new double?((double)nullable10.GetValueOrDefault()) : new double?();
+            photo.Longitude = nullable12;
+            return photo;
+        }
+        private static long? GetNullableLongId(VkResponse response)
+        {
+            if (string.IsNullOrWhiteSpace(response != null ? response.ToString() : (string)null))
+                return new long?();
+            return new long?(Convert.ToInt64(response.ToString()));
         }
     }
 }

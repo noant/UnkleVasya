@@ -48,4 +48,36 @@
     <Key xsi:type="xsd:int">11</Key>
     <Value xsi:type="xsd:string">по* часов</Value>
   </XmlItem>
+  <XmlItem>
+    <Key xsi:type="xsd:int">12</Key>
+    <Value xsi:type="xsd:string">в * часов</Value>
+  </XmlItem>
+  <XmlItem>
+    <Key xsi:type="xsd:int">13</Key>
+    <Value xsi:type="xsd:string">в *часов</Value>
+  </XmlItem>
+  <XmlItem>
+    <Key xsi:type="xsd:int">14</Key>
+    <Value xsi:type="xsd:string">в* часов</Value>
+  </XmlItem>
+  <XmlItem>
+    <Key xsi:type="xsd:int">15</Key>
+    <Value xsi:type="xsd:string">в*часов</Value>
+  </XmlItem>
+
+  <Key xsi:type="xsd:int">16</Key>
+  <Value xsi:type="xsd:string">в * часа</Value>
+  </XmlItem>
+  <XmlItem>
+    <Key xsi:type="xsd:int">17</Key>
+    <Value xsi:type="xsd:string">в *часа</Value>
+  </XmlItem>
+  <XmlItem>
+    <Key xsi:type="xsd:int">18</Key>
+    <Value xsi:type="xsd:string">в* часа</Value>
+  </XmlItem>
+  <XmlItem>
+    <Key xsi:type="xsd:int">19</Key>
+    <Value xsi:type="xsd:string">в*часа</Value>
+  </XmlItem>
 </ArrayOfXmlItem>
