@@ -45,5 +45,16 @@ namespace VK_UnkleVasya
                 value = value.Replace("#" + i.ToString(), objects[i].ToString());
             return value;
         }
+
+        public static T GetWhile<T>(Func<T> returnFunc, Func<T, bool> checkFunc, int tryCount) //mega crutch function
+        {
+            for (int i = 0; i < tryCount; i++)
+            {
+                var result = returnFunc();
+                if (checkFunc(result))
+                    return result;
+            }
+            return default(T);
+        }
     }
 }

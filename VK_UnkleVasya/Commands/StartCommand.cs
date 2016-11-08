@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using VkNet;
 using VkNet.Model;
+using VkNet.Model.Attachments;
 
 namespace VK_UnkleVasya.Commands
 {
@@ -13,8 +15,8 @@ namespace VK_UnkleVasya.Commands
             if (command == null)
             {
                 var dialog = DialogSettings.GetSession(vk, message);
-                var photoAndText = VkUtils.GetNextPictureAndMessageForDialog_Ad(vk, dialog);
-                VkNet.VkUtils.SendImage(vk, message, photoAndText.Key, photoAndText.Value);
+                var result = Utils.GetWhile(() => VkUtils.GetNextPictureAndMessageForDialog_Ad(vk, dialog), (res) => res.Key != null, 10);
+                VkNet.VkUtils.SendImage(vk, message, result.Key, result.Value);
             }
             else command.Execute(vk, message, query);
         }

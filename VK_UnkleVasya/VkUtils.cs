@@ -41,7 +41,15 @@ namespace VK_UnkleVasya
             if (album.PhotosCount == null)
                 PrepareAlbumSize(vk, album);
 
-            return GetPicture(vk, album, Utils.GetNextRandom(0, (int)album.PhotosCount.Value - 1), Utils.GetNextRandom(0, 1) == 0);
+            if (album.PhotosCount == null || album.PhotosCount == 0)
+                return null; //mega crutch #1
+
+            var photo = Utils.GetWhile(
+                () => GetPicture(vk, album, Utils.GetNextRandom(0, (int)album.PhotosCount.Value - 1), Utils.GetNextRandom(0, 1) == 0),
+                (res) => res != null,
+                10);
+
+            return photo;
         }
 
         public static Photo GetPicture(VkApi vk, Album album, int index, bool fromEnd)
@@ -56,20 +64,20 @@ namespace VK_UnkleVasya
             valuesDictionary["offset"] = index.ToString();
             valuesDictionary["count"] = "1";
 
-            var jToken = JToken.Parse(vk.Invoke("photos.get", valuesDictionary).Replace("{{", "{").Replace("}}", "}"))["response"][0];
-            var photo = PhotoFromJson(new VkResponse(jToken));
+            var jToken = JToken.Parse(vk.Invoke("photos.get", valuesDictionary).Replace("{{", "{").Replace("}}", "}"))["response"];
+            if (jToken.FirstOrDefault() == null) return null;
+            var photo = PhotoFromJson(new VkResponse(jToken[0]));
             return photo;
         }
 
         public static void PrepareAlbumSize(VkApi vk, Album album)
         {
-            album.PhotosCount =
-                vk.Photo.GetAlbums(new PhotoGetAlbumsParams()
-                {
-                    AlbumIds = new[] { album.Id },
-                    Count = 1,
-                    OwnerId = album.GroupId * -1
-                }, false).First().Size;
+            album.PhotosCount = vk.Photo.GetAlbums(new PhotoGetAlbumsParams()
+            {
+                AlbumIds = new[] { album.Id },
+                Count = 1,
+                OwnerId = album.GroupId * -1
+            }, false).FirstOrDefault()?.Size;
         }
 
         public static ApiAuthParams GetCredentials()
@@ -193,11 +201,18 @@ namespace VK_UnkleVasya
             photo.Longitude = nullable12;
             return photo;
         }
+
         private static long? GetNullableLongId(VkResponse response)
         {
             if (string.IsNullOrWhiteSpace(response != null ? response.ToString() : (string)null))
                 return new long?();
             return new long?(Convert.ToInt64(response.ToString()));
+        }
+
+        public static bool IsAccessTokenError(Exception e)
+        {
+            return e.Message.ToLower().Contains("access_token") ||
+                e.Message.ToLower().Contains("access token");
         }
     }
 }

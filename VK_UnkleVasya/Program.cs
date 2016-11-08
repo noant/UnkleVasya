@@ -81,6 +81,10 @@ namespace VK_UnkleVasya
                         Log.Write(e);
                         Console.WriteLine(e.Message);
                     }
+                    else if (VkUtils.IsAccessTokenError(e))
+                    {
+                        vk.RefreshToken();
+                    }
                 }
             }
         }
