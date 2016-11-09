@@ -24,7 +24,7 @@ namespace VK_UnkleVasya
             var arr = new Photo[count];
             for (int i = 0; i < count; i++)
             {
-                arr[i] = GetRandomPicture(vk);
+                arr[i] = Utils.GetWhile(() => GetRandomPicture(vk), (photo) => photo != null, 10);
                 VkNet.VkUtils.TechnicalSleepForVk();
             }
             return arr;

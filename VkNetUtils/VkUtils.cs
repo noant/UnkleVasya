@@ -77,7 +77,9 @@ namespace VkNet
             else
                 sendParams.ChatId = message.ChatId;
 
-            sendParams.Attachments = photos;
+            photos = photos.Where(x => x != null).ToArray();            
+            if (photos.Any())
+                sendParams.Attachments = photos.Where(x=>x != null);
 
             vk.Messages.Send(sendParams);
         }
