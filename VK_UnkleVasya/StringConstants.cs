@@ -11,6 +11,7 @@
         public static string AdPicturesSettingsFileName = "settings/adpictures_settings.xml";
         public static string AdTextSettingsFileName = "settings/adtext_settings.xml";
         public static string AdTextValuesFileName = "settings/adtext_values.xml";
+        public static string TagSynonymsFileName = "settings/tagsSynonyms.xml";
         public static string ExceptSessionFilename = "folder_contains_session_files";
 
         public static string Dialog_IntervalOkResponse = "Понял, командир. Теперь работаю с интервалом в #0 час(ов)";

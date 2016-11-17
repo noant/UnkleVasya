@@ -107,7 +107,7 @@ namespace VK_UnkleVasya
             return (message.ChatId ?? message.UserId).Value * (message.ChatId != null ? -1 : 1);
         }
 
-        public static KeyValuePair<Photo, string> GetNextPictureAndMessageForDialog_Ad(VkApi vk, DialogSettings dialog)
+        public static KeyValuePair<Photo, string> GetNextPictureAndMessageForDialog_Ad(VkApi vk, DialogSettings dialog, Album album = null)
         {
             Photo photo = null;
             string message = null;
@@ -119,7 +119,7 @@ namespace VK_UnkleVasya
             }
             if (photo == null)
             {
-                photo = GetRandomPicture(vk);
+                photo = album == null ? GetRandomPicture(vk) : GetRandomPicture(vk, album);
                 message = GetNextMessageForDialog_Ad(dialog, false);
             }
             dialog.IncrementImgsCountAndCommit();

@@ -64,9 +64,9 @@
     <Key xsi:type="xsd:int">15</Key>
     <Value xsi:type="xsd:string">в*часов</Value>
   </XmlItem>
-
-  <Key xsi:type="xsd:int">16</Key>
-  <Value xsi:type="xsd:string">в * часа</Value>
+  <XmlItem>
+    <Key xsi:type="xsd:int">16</Key>
+    <Value xsi:type="xsd:string">в * часа</Value>
   </XmlItem>
   <XmlItem>
     <Key xsi:type="xsd:int">17</Key>

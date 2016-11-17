@@ -12,6 +12,8 @@ namespace VK_UnkleVasya
 
         public static EroRepository Repository { get; private set; }
 
+        public static Dictionary<string, List<Album>> TagsAlbums { get; private set; }
+
         static EroRepository()
         {
             HierarchicalObjectCrutch.Register(typeof(Album));
@@ -22,6 +24,36 @@ namespace VK_UnkleVasya
         {
             var hData = HierarchicalObject.FromFile(StringConstants.AlbumsFileName);
             Repository = hData[0];
+            TagsAlbums = new Dictionary<string, List<Album>>();
+
+            //разворачивание тегов и их синонимов
+            foreach (var album in Repository.Albums)
+            {
+                if (album.Tags != null)
+                    foreach (var albumTag in album.Tags)
+                    {
+                        var tag = albumTag.ToLower().Trim();
+
+                        if (!TagsAlbums.ContainsKey(tag))
+                            TagsAlbums.Add(tag, new List<Album>());
+
+                        TagsAlbums[tag].Add(album);
+
+                        if (TagsContainer.Current.Dictionary.ContainsKey(tag))
+                        {
+                            foreach (var tagSynonym in TagsContainer.Current.Dictionary[tag])
+                            {
+                                if (!tagSynonym.Equals("#"))
+                                {
+                                    if (!TagsAlbums.ContainsKey(tagSynonym))
+                                        TagsAlbums.Add(tagSynonym, new List<Album>());
+
+                                    TagsAlbums[tagSynonym].Add(album);
+                                }
+                            }
+                        }
+                    }
+            }
         }
     }
 
@@ -42,6 +74,8 @@ namespace VK_UnkleVasya
 
         [XmlIgnore]
         public long? PhotosCount { get; set; }
+
+        public string[] Tags { get; set; }
 
         public Album()
         {

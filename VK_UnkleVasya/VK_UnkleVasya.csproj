@@ -78,6 +78,7 @@
     <Compile Include="Commands\StopIntervalDispatchingCommand.cs" />
     <Compile Include="Commands\StartIntervalDispatchingCommand.cs" />
     <Compile Include="Commands\StartCommand.cs" />
+    <Compile Include="Commands\TagCommand.cs" />
     <Compile Include="DialogSettings.cs" />
     <Compile Include="EroRepository.cs" />
     <Compile Include="Commands\Command.cs" />
@@ -86,6 +87,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomMessages.cs" />
+    <Compile Include="TagsContainer.cs" />
+    <Compile Include="TagSynonyms.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="VkUtils.cs" />
   </ItemGroup>
@@ -160,6 +163,11 @@
       <Project>{4850006b-52ff-4b26-9323-6ccdcf5615d2}</Project>
       <Name>VkNetUtils</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="settings\tagsSynonyms.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
