@@ -14,6 +14,6 @@
   </XmlItem>
   <XmlItem>
     <Key xsi:type="xsd:int">3</Key>
-    <Value xsi:type="xsd:boolean">true</Value>
+    <Value xsi:type="xsd:boolean">false</Value>
   </XmlItem>
 </ArrayOfXmlItem>
